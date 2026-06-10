@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Portfolio PFE — Mohamed El Birch · Galvamed</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy:    #0B1E2D;
+    --steel:   #1E3448;
+    --zinc:    #C8A84B;
+    --zinc-lt: #E2C97A;
+    --blue:    #4A90A4;
+    --text:    #E8EDF2;
+    --muted:   #8A9BB0;
+    --card:    #162538;
+    --border:  rgba(200,168,75,0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px;
+    height: 60px;
+    background: rgba(11,30,45,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-brand {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1.1rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--zinc);
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--zinc); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 80px 80px 60px;
+    gap: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 70% at 70% 40%, rgba(74,144,164,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-label {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--zinc); font-weight: 600;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-label::before {
+    content: ''; width: 28px; height: 1px; background: var(--zinc);
+  }
+
+  h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(2.6rem, 5vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+  h1 .accent { color: var(--zinc); }
+  h1 .light { font-weight: 300; color: var(--muted); }
+
+  .hero-desc {
+    color: var(--muted);
+    font-size: 0.95rem;
+    max-width: 440px;
+    margin-bottom: 36px;
+    line-height: 1.7;
+  }
+
+  .tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 36px;
+  }
+  .tag {
+    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 2px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: rgba(74,144,164,0.06);
+  }
+  .tag.primary { border-color: rgba(200,168,75,0.4); color: var(--zinc-lt); background: rgba(200,168,75,0.07); }
+
+  .hero-meta {
+    display: flex; gap: 32px;
+  }
+  .hero-meta-item { text-align: left; }
+  .hero-meta-item .val {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2rem; font-weight: 700;
+    color: var(--zinc); line-height: 1;
+    display: block;
+  }
+  .hero-meta-item .lbl {
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin-top: 4px; display: block;
+  }
+
+  /* ── CHART CARD ── */
+  .chart-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px;
+    position: relative;
+  }
+  .chart-card-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  .chart-card-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .chart-card-badge {
+    font-size: 0.68rem; padding: 3px 8px;
+    background: rgba(200,168,75,0.12);
+    border: 1px solid rgba(200,168,75,0.3);
+    color: var(--zinc); border-radius: 2px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .norm-badge {
+    font-size: 0.68rem; padding: 3px 8px;
+    background: rgba(74,144,164,0.12);
+    border: 1px solid rgba(74,144,164,0.3);
+    color: var(--blue); border-radius: 2px;
+    letter-spacing: 0.08em;
+  }
+
+  #control-chart { width: 100%; height: 200px; display: block; }
+
+  .chart-legend {
+    display: flex; gap: 20px; margin-top: 12px; flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 0.7rem; color: var(--muted);
+  }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* ── SECTIONS COMMON ── */
+  section { padding: 100px 80px; }
+  .section-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--zinc); font-weight: 600;
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 12px;
+  }
+  .section-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--zinc); }
+
+  h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 700; line-height: 1.1;
+    margin-bottom: 48px;
+  }
+  h2 .accent { color: var(--zinc); }
+
+  /* ── CONTEXT ── */
+  .context-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    border: 1px solid var(--border);
+  }
+  .ctx-cell {
+    background: var(--card);
+    padding: 32px;
+    border: 1px solid rgba(200,168,75,0.06);
+  }
+  .ctx-cell h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--zinc); margin-bottom: 12px;
+  }
+  .ctx-cell p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+  .ctx-cell .big-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 3.5rem; font-weight: 800;
+    color: var(--text); line-height: 1;
+    margin-bottom: 8px;
+  }
+  .ctx-cell .big-num span { color: var(--zinc); }
+
+  /* ── PDCA ── */
+  .pdca-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .pdca-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .pdca-card:hover {
+    border-color: rgba(200,168,75,0.45);
+    transform: translateY(-3px);
+  }
+  .pdca-card::before {
+    content: attr(data-letter);
+    position: absolute; top: -10px; right: 16px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 5rem; font-weight: 800;
+    color: rgba(200,168,75,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .pdca-letter {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2.2rem; font-weight: 800;
+    color: var(--zinc); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .pdca-subtitle {
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 16px;
+  }
+  .pdca-items { list-style: none; }
+  .pdca-items li {
+    font-size: 0.85rem; color: var(--muted);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    line-height: 1.5;
+    padding-left: 12px;
+    position: relative;
+  }
+  .pdca-items li::before {
+    content: '›';
+    position: absolute; left: 0;
+    color: var(--zinc); font-weight: 600;
+  }
+  .pdca-items li:last-child { border-bottom: none; }
+
+  /* ── AMDEC TABLE ── */
+  .amdec-section { background: var(--steel); }
+  .table-wrap { overflow-x: auto; }
+  table {
+    width: 100%; border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+  thead tr {
+    background: rgba(200,168,75,0.1);
+    border-bottom: 2px solid rgba(200,168,75,0.3);
+  }
+  th {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--zinc); padding: 14px 16px;
+    text-align: left; font-weight: 600;
+  }
+  td {
+    padding: 12px 16px; color: var(--muted);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: top; line-height: 1.5;
+  }
+  tr:hover td { background: rgba(74,144,164,0.04); color: var(--text); }
+  .ipr-high { color: #E87070; font-weight: 600; }
+  .ipr-med  { color: var(--zinc); font-weight: 600; }
+  .ipr-low  { color: #6BBFA0; font-weight: 600; }
+
+  /* ── CONTROL CHART FULL ── */
+  .chart-full-wrap {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 36px;
+    margin-top: 40px;
+  }
+  .chart-full-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
+  }
+  .chart-full-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem; font-weight: 700; color: var(--text);
+  }
+  .chart-full-sub { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+  .limits-row {
+    display: flex; gap: 24px; flex-wrap: wrap;
+  }
+  .limit-badge {
+    font-size: 0.72rem; padding: 4px 10px;
+    border-radius: 2px; letter-spacing: 0.06em;
+  }
+  .limit-badge.lsl { background: rgba(74,144,164,0.12); border: 1px solid rgba(74,144,164,0.3); color: var(--blue); }
+  .limit-badge.usl { background: rgba(200,168,75,0.12); border: 1px solid rgba(200,168,75,0.3); color: var(--zinc); }
+  .limit-badge.cl  { background: rgba(106,191,160,0.12); border: 1px solid rgba(106,191,160,0.3); color: #6BBFA0; }
+  .limit-badge.cst { background: rgba(232,112,112,0.12); border: 1px solid rgba(232,112,112,0.3); color: #E87070; }
+
+  #xbar-chart { width: 100%; height: 240px; display: block; margin-bottom: 20px; }
+  #range-chart { width: 100%; height: 140px; display: block; }
+
+  /* ── RÉSULTATS ── */
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 60px;
+  }
+  .result-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 32px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .result-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--zinc);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+    transform-origin: left;
+  }
+  .result-card:hover::after { transform: scaleX(1); }
+  .result-before {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; color: #E87070;
+    text-decoration: line-through; opacity: 0.7;
+    margin-bottom: 4px;
+  }
+  .result-arrow { font-size: 1.2rem; color: var(--muted); margin: 4px 0; }
+  .result-after {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 3rem; font-weight: 800;
+    color: var(--zinc); line-height: 1;
+  }
+  .result-label {
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin-top: 10px;
+  }
+  .result-norm {
+    font-size: 0.68rem; color: var(--blue);
+    margin-top: 6px;
+  }
+
+  /* ── VBA ── */
+  .vba-section { background: var(--steel); }
+  .vba-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
+  }
+  .vba-mockup {
+    background: #0D1F2E;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .vba-titlebar {
+    background: rgba(200,168,75,0.08);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .vba-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .vba-titlebar-label {
+    font-size: 0.72rem; letter-spacing: 0.1em;
+    color: var(--muted); margin-left: 4px;
+    text-transform: uppercase;
+  }
+  .vba-body { padding: 20px; }
+  .vba-field {
+    margin-bottom: 14px;
+  }
+  .vba-field label {
+    display: block; font-size: 0.68rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 5px;
+  }
+  .vba-input {
+    width: 100%; background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 2px; padding: 8px 12px;
+    color: var(--text); font-size: 0.85rem;
+    font-family: 'Inter', sans-serif;
+  }
+  .vba-input.highlight { border-color: rgba(200,168,75,0.4); color: var(--zinc-lt); }
+  .vba-btn {
+    background: var(--zinc); color: var(--navy);
+    border: none; padding: 10px 24px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    border-radius: 2px; cursor: pointer;
+    margin-top: 6px;
+  }
+  .vba-features { list-style: none; }
+  .vba-features li {
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+  .vba-features li:last-child { border-bottom: none; }
+  .feat-icon {
+    width: 32px; height: 32px; border-radius: 3px;
+    background: rgba(200,168,75,0.1);
+    border: 1px solid rgba(200,168,75,0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--zinc); font-size: 0.9rem; flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .feat-text h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.95rem; font-weight: 600;
+    color: var(--text); margin-bottom: 3px;
+    letter-spacing: 0.03em;
+  }
+  .feat-text p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── COMPÉTENCES ── */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 3px; padding: 24px;
+  }
+  .skill-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--zinc); margin-bottom: 14px;
+  }
+  .skill-item {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .skill-name { font-size: 0.83rem; color: var(--muted); }
+  .skill-bar-wrap {
+    width: 100px; height: 3px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 2px; overflow: hidden;
+  }
+  .skill-bar {
+    height: 100%; background: var(--zinc);
+    border-radius: 2px;
+    transition: width 1.2s ease;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 48px 80px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-info h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--text); letter-spacing: 0.03em;
+  }
+  .footer-info p { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--zinc); }
+  .footer-norm {
+    font-size: 0.72rem; color: var(--blue);
+    border: 1px solid rgba(74,144,164,0.3);
+    padding: 4px 10px; border-radius: 2px;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
+    section { padding: 70px 24px; }
+    .pdca-grid { grid-template-columns: 1fr 1fr; }
+    .context-grid { grid-template-columns: 1fr; }
+    .results-grid { grid-template-columns: 1fr; }
+    .vba-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    footer { padding: 40px 24px; flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 560px) {
+    .pdca-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">M. El Birch · PFE 2024–2025</div>
+  <ul class="nav-links">
+    <li><a href="#contexte">Contexte</a></li>
+    <li><a href="#demarche">Démarche</a></li>
+    <li><a href="#msp">Cartes MSP</a></li>
+    <li><a href="#resultats">Résultats</a></li>
+    <li><a href="#outils">Outils VBA</a></li>
+    <li><a href="#competences">Compétences</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="accueil">
+  <div class="hero-content">
+    <div class="hero-label">Projet de Fin d'Études · Génie Industriel</div>
+    <h1>
+      Maîtrise<br/>
+      <span class="accent">Statistique</span><br/>
+      <span class="light">du Procédé de</span><br/>
+      Galvanisation
+    </h1>
+    <p class="hero-desc">
+      Réduction du taux de non-conformité par déploiement de la MSP, AMDEC process et automatisation du suivi qualité — conformément à la norme <strong style="color:var(--blue)">ISO 1461</strong> et aux exigences client <strong style="color:var(--zinc)">Africlait (≥ 85 µm)</strong>.
+    </p>
+    <div class="tags">
+      <span class="tag primary">ISO 1461</span>
+      <span class="tag primary">MSP / Cartes X̄-R</span>
+      <span class="tag">PDCA</span>
+      <span class="tag">AMDEC Process</span>
+      <span class="tag">VBA Excel</span>
+      <span class="tag">Analyse Pareto</span>
+      <span class="tag">5M</span>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="val">−73%</span>
+        <span class="lbl">Taux NC</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="val">−40%</span>
+        <span class="lbl">Charge admin.</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="val">6 mois</span>
+        <span class="lbl">Durée stage</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIGNATURE ELEMENT: Carte de contrôle animée -->
+  <div class="chart-card">
+    <div class="chart-card-header">
+      <div>
+        <div class="chart-card-title">Carte X̄ — Épaisseur Revêtement Zinc</div>
+        <div style="margin-top:5px; display:flex; gap:8px; flex-wrap:wrap;">
+          <span class="norm-badge">ISO 1461 · Candélabres 8m</span>
+          <span class="chart-card-badge">Africlait ≥ 85 µm</span>
+        </div>
+      </div>
+    </div>
+    <canvas id="control-chart"></canvas>
+    <div class="chart-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#E87070"></div>Avant MSP</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#6BBFA0"></div>Après MSP</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--zinc); width:20px; height:2px; border-radius:1px;"></div>LIC client 85µm</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--blue); width:20px; height:2px; border-radius:1px; opacity:0.6"></div>Limite ISO 1461</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTEXTE -->
+<section id="contexte">
+  <div class="section-eyebrow">Contexte</div>
+  <h2>Galvamed · <span class="accent">Galvanisation à chaud</span></h2>
+  <div class="context-grid reveal">
+    <div class="ctx-cell">
+      <h3>Le procédé</h3>
+      <p>Immersion des pièces en acier dans un bain de zinc fondu à <strong style="color:var(--text)">450 °C</strong>. Le revêtement formé protège contre la corrosion. L'épaisseur du dépôt est le paramètre critique de conformité.</p>
+    </div>
+    <div class="ctx-cell">
+      <h3>Exigences normatives</h3>
+      <p>La norme <strong style="color:var(--blue)">ISO 1461</strong> fixe l'épaisseur minimale selon la catégorie d'acier. Le client <strong style="color:var(--zinc)">Africlait</strong> impose une épaisseur locale minimale de <strong style="color:var(--zinc)">85 µm</strong> sur les candélabres 8m.</p>
+    </div>
+    <div class="ctx-cell">
+      <h3>Problème initial</h3>
+      <div class="big-num">8.5<span>%</span></div>
+      <p>Taux de non-conformité sur la ligne candélabres — surépaisseurs (surconsommation zinc) et sous-épaisseurs (régalvanisation obligatoire).</p>
+    </div>
+    <div class="ctx-cell">
+      <h3>Double enjeu</h3>
+      <p><strong style="color:var(--text)">Technique :</strong> maîtriser la variabilité du revêtement et réduire les défauts d'épaisseur.<br/><br/><strong style="color:var(--text)">Organisationnel :</strong> automatiser un suivi qualité entièrement manuel, chronophage et source d'erreurs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DÉMARCHE PDCA -->
+<section id="demarche" style="background: var(--steel);">
+  <div class="section-eyebrow">Méthodologie</div>
+  <h2>Démarche <span class="accent">PDCA</span></h2>
+  <div class="pdca-grid reveal">
+    <div class="pdca-card" data-letter="P">
+      <div class="pdca-letter">P</div>
+      <div class="pdca-subtitle">Plan · Analyser</div>
+      <ul class="pdca-items">
+        <li>Analyse Pareto des non-conformités — 82% liés à la variation d'épaisseur</li>
+        <li>Collecte des fiches de non-conformité sur 3 mois</li>
+        <li>AMDEC Process sur le flux de galvanisation</li>
+        <li>Diagramme 5M : Milieu, Machine, Matière, Méthode, Main-d'œuvre</li>
+        <li>Identification des causes racines : température bain, vitesse de sortie, égouttage</li>
+      </ul>
+    </div>
+    <div class="pdca-card" data-letter="D">
+      <div class="pdca-letter">D</div>
+      <div class="pdca-subtitle">Do · Déployer</div>
+      <ul class="pdca-items">
+        <li>Mise en place cartes X̄-R sur famille candélabres 8m</li>
+        <li>Sous-groupes de taille n=5, fréquence horaire</li>
+        <li>Étalonnage jauges à ultrasons ELCOMETER 456</li>
+        <li>Formation et sensibilisation des opérateurs à l'autocontrôle</li>
+        <li>Développement application Excel VBA de saisie</li>
+      </ul>
+    </div>
+    <div class="pdca-card" data-letter="C">
+      <div class="pdca-letter">C</div>
+      <div class="pdca-subtitle">Check · Vérifier</div>
+      <ul class="pdca-items">
+        <li>Audits internes hebdomadaires de suivi (6 semaines)</li>
+        <li>Calcul Cp et Cpk avant/après déploiement</li>
+        <li>Comparaison statistique des distributions d'épaisseur</li>
+        <li>Vérification de la conformité ISO 1461 et seuil Africlait 85 µm</li>
+        <li>Analyse des points hors contrôle (règles Western Electric)</li>
+      </ul>
+    </div>
+    <div class="pdca-card" data-letter="A">
+      <div class="pdca-letter">A</div>
+      <div class="pdca-subtitle">Act · Standardiser</div>
+      <ul class="pdca-items">
+        <li>Généralisation des cartes X̄-R à 4 autres familles produits</li>
+        <li>Mise à jour des procédures qualité (PQ-GAL-07)</li>
+        <li>Plan de surveillance révisé — fréquence et critères d'action</li>
+        <li>Intégration VBA dans le système de management qualité</li>
+        <li>Formation continue opérateurs planifiée</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- AMDEC -->
+<section id="amdec">
+  <div class="section-eyebrow">Analyse des risques</div>
+  <h2>AMDEC <span class="accent">Process</span> — Extraits</h2>
+  <div class="table-wrap reveal">
+    <table>
+      <thead>
+        <tr>
+          <th>Étape process</th>
+          <th>Mode de défaillance</th>
+          <th>Effet</th>
+          <th>Cause</th>
+          <th>G</th><th>O</th><th>D</th>
+          <th>IPR</th>
+          <th>Action corrective</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bain de zinc</td>
+          <td>Température hors plage (±15°C)</td>
+          <td>Sous-épaisseur / défaut adhérence</td>
+          <td>Thermocouple dérivé, variation charge</td>
+          <td>8</td><td>5</td><td>3</td>
+          <td class="ipr-high">120</td>
+          <td>Étalonnage mensuel thermocouple + alarme automatique</td>
+        </tr>
+        <tr>
+          <td>Sortie du bain</td>
+          <td>Vitesse de relevage irrégulière</td>
+          <td>Surépaisseur localisée, coulures</td>
+          <td>Usure palans, consigne opérateur non suivie</td>
+          <td>6</td><td>6</td><td>4</td>
+          <td class="ipr-high">144</td>
+          <td>Maintenance préventive palans + instruction de travail visuelle</td>
+        </tr>
+        <tr>
+          <td>Égouttage</td>
+          <td>Durée insuffisante</td>
+          <td>Surépaisseur, zinc résiduel</td>
+          <td>Pression cadence production</td>
+          <td>5</td><td>7</td><td>3</td>
+          <td class="ipr-med">105</td>
+          <td>Minuterie d'égouttage obligatoire + carte de contrôle</td>
+        </tr>
+        <tr>
+          <td>Décapage</td>
+          <td>Concentration acide insuffisante</td>
+          <td>Mauvaise préparation surface → sous-épaisseur</td>
+          <td>Absence de contrôle densimétrique</td>
+          <td>7</td><td>4</td><td>5</td>
+          <td class="ipr-med">140</td>
+          <td>Contrôle densimétrique journalier + fiche de suivi bain</td>
+        </tr>
+        <tr>
+          <td>Mesure épaisseur</td>
+          <td>Dérive jauge ELCOMETER</td>
+          <td>Fausse conformité → NC client</td>
+          <td>Pas de plan d'étalonnage formalisé</td>
+          <td>9</td><td>3</td><td>6</td>
+          <td class="ipr-med">162</td>
+          <td>Plan d'étalonnage trimestriel ISO 1461 — enregistrement VBA</td>
+        </tr>
+        <tr>
+          <td>Flux de zinc</td>
+          <td>Inclusions de cendres de zinc</td>
+          <td>Défauts d'aspect, porosité revêtement</td>
+          <td>Écumage irrégulier surface bain</td>
+          <td>4</td><td>4</td><td>4</td>
+          <td class="ipr-low">64</td>
+          <td>Procédure d'écumage toutes 2h + check-list opérateur</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:0.75rem; color:var(--muted); margin-top:16px;">G = Gravité · O = Occurrence · D = Détectabilité · IPR = Indice de Priorité du Risque (G×O×D)</p>
+</section>
+
+<!-- MSP / CARTES -->
+<section id="msp" style="background: var(--steel);">
+  <div class="section-eyebrow">Maîtrise Statistique du Procédé</div>
+  <h2>Cartes de contrôle <span class="accent">X̄-R</span></h2>
+  <p style="color:var(--muted); max-width:600px; margin-bottom:16px; font-size:0.9rem;">
+    Candélabres 8m — mesures d'épaisseur de revêtement zinc en µm · Sous-groupes n=5 · Fréquence horaire<br/>
+    <span style="color:var(--blue)">Exigence Africlait : ≥ 85 µm</span> · <span style="color:var(--zinc)">ISO 1461 : ≥ 70 µm (acier &gt;3mm)</span>
+  </p>
+  <div class="chart-full-wrap reveal">
+    <div class="chart-full-header">
+      <div>
+        <div class="chart-full-title">Carte X̄ — Moyenne des sous-groupes</div>
+        <div class="chart-full-sub">Évolution avant déploiement MSP → après stabilisation</div>
+      </div>
+      <div class="limits-row">
+        <span class="limit-badge lsl">LSC (ISO) = 70 µm</span>
+        <span class="limit-badge cst">LIC client = 85 µm</span>
+        <span class="limit-badge cl">CL = 96.4 µm</span>
+        <span class="limit-badge usl">LSC stat = 118 µm</span>
+      </div>
+    </div>
+    <canvas id="xbar-chart"></canvas>
+    <div class="chart-full-title" style="font-size:0.9rem; margin-bottom:12px; margin-top:8px; color:var(--muted);">Carte R — Étendue des sous-groupes (variabilité)</div>
+    <canvas id="range-chart"></canvas>
+  </div>
+</section>
+
+<!-- RÉSULTATS -->
+<section id="resultats">
+  <div class="section-eyebrow">Résultats & Impact</div>
+  <h2>Mesure de <span class="accent">l'efficacité</span></h2>
+  <div class="results-grid reveal">
+    <div class="result-card">
+      <div class="result-before">8.5 %</div>
+      <div class="result-arrow">↓</div>
+      <div class="result-after">2.3%</div>
+      <div class="result-label">Taux de Non-Conformité</div>
+      <div class="result-norm">Conforme ISO 1461 · Seuil Africlait atteint</div>
+    </div>
+    <div class="result-card">
+      <div class="result-before">~3.2 h/semaine</div>
+      <div class="result-arrow">↓</div>
+      <div class="result-after">−40%</div>
+      <div class="result-label">Charge administrative qualité</div>
+      <div class="result-norm">Via automatisation Excel VBA</div>
+    </div>
+    <div class="result-card">
+      <div class="result-before">Cpk = 0.61</div>
+      <div class="result-arrow">↑</div>
+      <div class="result-after">1.24</div>
+      <div class="result-label">Indice de capabilité Cpk</div>
+      <div class="result-norm">Procédé capable ≥ 1.33 visé à terme</div>
+    </div>
+  </div>
+
+  <!-- Pareto mini -->
+  <div class="chart-full-wrap reveal" style="max-width:700px;">
+    <div class="chart-full-header">
+      <div>
+        <div class="chart-full-title">Analyse de Pareto — Causes de non-conformité</div>
+        <div class="chart-full-sub">Avant déploiement MSP · 342 fiches NC analysées</div>
+      </div>
+    </div>
+    <canvas id="pareto-chart" style="width:100%; height:220px; display:block;"></canvas>
+  </div>
+</section>
+
+<!-- VBA -->
+<section id="outils" class="vba-section">
+  <div class="section-eyebrow">Automatisation</div>
+  <h2>Application <span class="accent">Excel VBA</span></h2>
+  <div class="vba-grid reveal">
+    <div>
+      <ul class="vba-features">
+        <li>
+          <div class="feat-icon">📥</div>
+          <div class="feat-text">
+            <h4>Interface de saisie structurée</h4>
+            <p>Formulaire UserForm de saisie des mesures d'épaisseur par sous-groupe — validation automatique des seuils ISO 1461 et Africlait à la saisie.</p>
+          </div>
+        </li>
+        <li>
+          <div class="feat-icon">📊</div>
+          <div class="feat-text">
+            <h4>Génération automatique des cartes X̄-R</h4>
+            <p>Calcul des limites de contrôle (A₂·R̄, D₃·R̄, D₄·R̄), mise à jour en temps réel à chaque nouveau sous-groupe saisi.</p>
+          </div>
+        </li>
+        <li>
+          <div class="feat-icon">📋</div>
+          <div class="feat-text">
+            <h4>Rapport de non-conformité automatisé</h4>
+            <p>Génération PDF du rapport NC avec numérotation automatique, cause présélectionnée et action corrective associée — en un clic.</p>
+          </div>
+        </li>
+        <li>
+          <div class="feat-icon">📁</div>
+          <div class="feat-text">
+            <h4>Archivage & traçabilité</h4>
+            <p>Horodatage automatique, liaison avec le numéro de lot et l'opérateur — conforme aux exigences d'enregistrement ISO 1461.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="vba-mockup">
+      <div class="vba-titlebar">
+        <div class="vba-dot" style="background:#E87070"></div>
+        <div class="vba-dot" style="background:var(--zinc)"></div>
+        <div class="vba-dot" style="background:#6BBFA0"></div>
+        <span class="vba-titlebar-label">Suivi_Qualité_Galvamed.xlsm</span>
+      </div>
+      <div class="vba-body">
+        <div style="font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--zinc); margin-bottom:14px; font-family:'Barlow Condensed',sans-serif;">Saisie mesures — Candélabres 8m</div>
+        <div class="vba-field">
+          <label>N° Lot</label>
+          <input class="vba-input" type="text" value="GAL-2025-0341" readonly/>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div class="vba-field">
+            <label>Mesure 1 (µm)</label>
+            <input class="vba-input highlight" type="text" value="91.4" readonly/>
+          </div>
+          <div class="vba-field">
+            <label>Mesure 2 (µm)</label>
+            <input class="vba-input" type="text" value="88.7" readonly/>
+          </div>
+          <div class="vba-field">
+            <label>Mesure 3 (µm)</label>
+            <input class="vba-input" type="text" value="94.2" readonly/>
+          </div>
+          <div class="vba-field">
+            <label>Mesure 4 (µm)</label>
+            <input class="vba-input" type="text" value="87.1" readonly/>
+          </div>
+        </div>
+        <div class="vba-field">
+          <label>Mesure 5 (µm)</label>
+          <input class="vba-input" type="text" value="92.8" readonly/>
+        </div>
+        <div style="display:flex; gap:10px; margin-top:6px; font-size:0.75rem; color:var(--muted);">
+          <span>X̄ = <strong style="color:var(--text)">90.84</strong></span>
+          <span>R = <strong style="color:var(--text)">7.1</strong></span>
+          <span style="color:#6BBFA0; font-weight:600;">✓ Conforme ISO 1461</span>
+        </div>
+        <button class="vba-btn" style="margin-top:14px;">Valider & Mettre à jour carte</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPÉTENCES -->
+<section id="competences">
+  <div class="section-eyebrow">Compétences mobilisées</div>
+  <h2>Outils & <span class="accent">Méthodes</span></h2>
+  <div class="skills-grid reveal">
+    <div class="skill-card">
+      <h3>Qualité & MSP</h3>
+      <div class="skill-item"><span class="skill-name">Cartes X̄-R</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">AMDEC Process</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Analyse Pareto</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">ISO 1461</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Capabilité Cp/Cpk</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div></div>
+    </div>
+    <div class="skill-card">
+      <h3>Méthodes industrielles</h3>
+      <div class="skill-item"><span class="skill-name">PDCA</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:92%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Diagramme 5M</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Audit interne</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Plan de surveillance</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Résolution de problèmes</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
+    </div>
+    <div class="skill-card">
+      <h3>Outils numériques</h3>
+      <div class="skill-item"><span class="skill-name">Excel VBA</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Analyse statistique</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Rapport technique</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Formation opérateurs</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:72%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Gestion de projet</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-info">
+    <h4>Mohamed El Birch</h4>
+    <p>Ingénieur Génie Industriel & Technologies Numériques · ENSAM Rabat 2025</p>
+    <p style="margin-top:6px;">Stage réalisé chez <strong style="color:var(--text)">Galvamed</strong> · Durée : 6 mois (2024–2025)</p>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-end;">
+    <span class="footer-norm">Conforme ISO 1461 · Client Africlait ≥ 85 µm</span>
+    <div class="footer-links">
+      <a href="#accueil">Haut de page</a>
+      <a href="#resultats">Résultats</a>
+      <a href="#msp">Cartes MSP</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── DONNÉES SIMULÉES ────────────────────────────────────────────────────────
+
+// Hero mini chart: avant (rouge) + après (vert) + limite client
+const heroLabels  = ['SG1','SG2','SG3','SG4','SG5','SG6','SG7','SG8','SG9','SG10','SG11','SG12','SG13','SG14','SG15'];
+const beforeData  = [78,   71,   83,   66,   74,   80,   63,   77,   70,   68,    82,    61,    75,    69,    73];
+const afterData   = [91,   93,   88,   96,   90,   94,   87,   92,   95,   89,    93,    91,    97,    90,    94];
+
+// Full X-bar chart
+const xbarLabels  = ['SG01','SG02','SG03','SG04','SG05','SG06','SG07','SG08','SG09','SG10',
+                     '→MSP','SG12','SG13','SG14','SG15','SG16','SG17','SG18','SG19','SG20',
+                     'SG21','SG22','SG23','SG24','SG25'];
+const xbarData    = [74.2,70.8,82.1,65.4,77.3,79.6,63.8,72.4,68.9,80.2,
+                     null,
+                     89.4,93.1,88.7,91.8,94.2,90.3,92.6,88.1,95.4,
+                     91.7,90.8,93.2,92.0,94.8];
+
+const rangeData   = [18.4,22.1,16.8,24.3,19.7,21.2,26.4,20.1,23.8,17.9,
+                     null,
+                     9.2,7.8,10.4,8.6,11.1,7.4,9.8,8.1,10.7,
+                     8.4,7.9,9.1,8.8,7.6];
+
+// Pareto data
+const paretoCateg  = ['Var. épaisseur','Inclusions','Défauts aspect','Adhérence','Porosités','Autres'];
+const paretoCounts = [278, 31, 16, 9, 5, 3];
+const paretoTotal  = paretoCounts.reduce((a,b)=>a+b,0);
+
+// ─── UTILS ───────────────────────────────────────────────────────────────────
+function lerp(a,b,t){ return a + (b-a)*t; }
+
+function drawGridLines(ctx, w, h, padL, padT, padB, count, color='rgba(255,255,255,0.05)'){
+  ctx.strokeStyle = color; ctx.lineWidth = 1;
+  for(let i=0;i<=count;i++){
+    const y = padT + (h - padT - padB) * i / count;
+    ctx.beginPath(); ctx.moveTo(padL,y); ctx.lineTo(w,y); ctx.stroke();
+  }
+}
+
+function drawHLine(ctx, y, color, dash=[]){
+  ctx.save();
+  ctx.strokeStyle = color; ctx.lineWidth = 1.5;
+  ctx.setLineDash(dash);
+  ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(ctx.canvas.width,y); ctx.stroke();
+  ctx.restore();
+}
+
+// ─── HERO MINI CHART (animé) ─────────────────────────────────────────────────
+(function(){
+  const canvas = document.getElementById('control-chart');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  function resize(){
+    canvas.width  = canvas.offsetWidth * devicePixelRatio;
+    canvas.height = canvas.offsetHeight * devicePixelRatio;
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+  }
+  resize();
+
+  const W = canvas.offsetWidth, H = canvas.offsetHeight;
+  const PAD = {t:10, b:30, l:8, r:8};
+  const chartH = H - PAD.t - PAD.b;
+  const chartW = W - PAD.l - PAD.r;
+  const minV=55, maxV=115;
+
+  function valY(v){ return PAD.t + chartH * (1 - (v-minV)/(maxV-minV)); }
+  function idxX(i, n){ return PAD.l + (i/(n-1)) * chartW; }
+
+  let progress = 0;
+  const n = heroLabels.length;
+
+  function draw(p){
+    ctx.clearRect(0,0,W,H);
+    // limite client Africlait
+    ctx.save();
+    ctx.strokeStyle = '#C8A84B'; ctx.lineWidth=1.5; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(PAD.l,valY(85)); ctx.lineTo(W-PAD.r,valY(85)); ctx.stroke();
+    ctx.fillStyle='#C8A84B'; ctx.font='10px Inter'; ctx.fillText('Africlait 85µm', W-PAD.r-70, valY(85)-4);
+    ctx.restore();
+    // limite ISO 1461
+    ctx.save();
+    ctx.strokeStyle='#4A90A4'; ctx.lineWidth=1; ctx.setLineDash([3,5]);
+    ctx.beginPath(); ctx.moveTo(PAD.l,valY(70)); ctx.lineTo(W-PAD.r,valY(70)); ctx.stroke();
+    ctx.fillStyle='#4A90A4'; ctx.font='9px Inter'; ctx.fillText('ISO 1461 min', W-PAD.r-68, valY(70)-4);
+    ctx.restore();
+
+    // before line
+    const ptsShown = Math.floor(p * n);
+    if(ptsShown > 1){
+      ctx.beginPath(); ctx.strokeStyle='#E87070'; ctx.lineWidth=1.5; ctx.setLineDash([]);
+      for(let i=0;i<ptsShown;i++){
+        const x=idxX(i,n), y=valY(beforeData[i]);
+        i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    }
+    // after line
+    if(ptsShown > 1){
+      ctx.beginPath(); ctx.strokeStyle='#6BBFA0'; ctx.lineWidth=1.5; ctx.setLineDash([]);
+      for(let i=0;i<ptsShown;i++){
+        const x=idxX(i,n), y=valY(afterData[i]);
+        i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    }
+    // dots
+    for(let i=0;i<ptsShown;i++){
+      ['#E87070','#6BBFA0'].forEach((col,ci)=>{
+        const d = ci===0?beforeData:afterData;
+        ctx.beginPath(); ctx.arc(idxX(i,n),valY(d[i]),3,0,2*Math.PI);
+        ctx.fillStyle=col; ctx.fill();
+      });
+    }
+    // x labels
+    ctx.fillStyle='#8A9BB0'; ctx.font='9px Inter';
+    for(let i=0;i<n;i+=3){
+      ctx.fillText(heroLabels[i], idxX(i,n)-8, H-8);
+    }
+  }
+
+  function animate(ts){
+    if(!animate.start) animate.start=ts;
+    progress = Math.min((ts-animate.start)/1800, 1);
+    draw(progress);
+    if(progress<1) requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+})();
+
+// ─── FULL X̄ CHART ────────────────────────────────────────────────────────────
+(function(){
+  const canvas = document.getElementById('xbar-chart');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.width  = canvas.offsetWidth * devicePixelRatio;
+  canvas.height = canvas.offsetHeight * devicePixelRatio;
+  ctx.scale(devicePixelRatio, devicePixelRatio);
+
+  const W=canvas.offsetWidth, H=canvas.offsetHeight;
+  const PAD={t:16,b:36,l:44,r:16};
+  const cW=W-PAD.l-PAD.r, cH=H-PAD.t-PAD.b;
+  const minV=55, maxV=125;
+  const data = xbarData;
+  const n = data.length;
+
+  function valY(v){ return PAD.t + cH*(1-(v-minV)/(maxV-minV)); }
+  function idxX(i){ return PAD.l + (i/(n-1))*cW; }
+
+  // grid
+  ctx.strokeStyle='rgba(255,255,255,0.04)'; ctx.lineWidth=1;
+  for(let i=0;i<=6;i++){
+    const y=PAD.t+cH*i/6;
+    ctx.beginPath(); ctx.moveTo(PAD.l,y); ctx.lineTo(W-PAD.r,y); ctx.stroke();
+    const val=Math.round(maxV-(maxV-minV)*i/6);
+    ctx.fillStyle='#8A9BB0'; ctx.font='10px Inter';
+    ctx.fillText(val+'µm',2,y+4);
+  }
+
+  // zone MSP (après)
+  const splitIdx=10;
+  ctx.fillStyle='rgba(107,191,160,0.04)';
+  ctx.fillRect(idxX(splitIdx)+2, PAD.t, cW-(idxX(splitIdx)+2-PAD.l), cH);
+
+  // limites
+  const limits=[
+    {v:118, col:'#C8A84B', dash:[6,4], lbl:'LSC 118'},
+    {v:96.4,col:'#6BBFA0', dash:[4,3], lbl:'CL 96.4'},
+    {v:85,  col:'#E87070', dash:[5,4], lbl:'Africlait 85'},
+    {v:70,  col:'#4A90A4', dash:[3,5], lbl:'ISO 1461 70'},
+  ];
+  limits.forEach(l=>{
+    ctx.save();
+    ctx.strokeStyle=l.col; ctx.lineWidth=1.2; ctx.setLineDash(l.dash);
+    ctx.beginPath(); ctx.moveTo(PAD.l,valY(l.v)); ctx.lineTo(W-PAD.r,valY(l.v)); ctx.stroke();
+    ctx.fillStyle=l.col; ctx.font='9px Inter'; ctx.setLineDash([]);
+    ctx.fillText(l.lbl, W-PAD.r-56, valY(l.v)-3);
+    ctx.restore();
+  });
+
+  // flèche MSP
+  ctx.fillStyle='rgba(200,168,75,0.5)'; ctx.font='10px Barlow Condensed,sans-serif';
+  ctx.fillText('↓ Déploiement MSP', idxX(splitIdx)+4, PAD.t+14);
+
+  // line
+  ctx.beginPath(); ctx.lineWidth=2; ctx.setLineDash([]);
+  data.forEach((v,i)=>{
+    if(v===null) return;
+    const col = i<splitIdx ? '#E87070' : '#6BBFA0';
+    ctx.strokeStyle=col;
+    if(i===0||data[i-1]===null){ctx.beginPath(); ctx.moveTo(idxX(i),valY(v));}
+    else { ctx.lineTo(idxX(i),valY(v)); ctx.stroke(); ctx.beginPath(); ctx.moveTo(idxX(i),valY(v)); }
+  });
+
+  // dots
+  data.forEach((v,i)=>{
+    if(v===null) return;
+    ctx.beginPath(); ctx.arc(idxX(i),valY(v),3.5,0,2*Math.PI);
+    ctx.fillStyle = i<splitIdx ? '#E87070' : '#6BBFA0';
+    ctx.fill();
+  });
+
+  // x labels
+  ctx.fillStyle='#8A9BB0'; ctx.font='9px Inter';
+  data.forEach((v,i)=>{
+    if(i%2===0 && v!==null) ctx.fillText(xbarLabels[i], idxX(i)-12, H-8);
+  });
+})();
+
+// ─── RANGE CHART ─────────────────────────────────────────────────────────────
+(function(){
+  const canvas = document.getElementById('range-chart');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.width  = canvas.offsetWidth * devicePixelRatio;
+  canvas.height = canvas.offsetHeight * devicePixelRatio;
+  ctx.scale(devicePixelRatio, devicePixelRatio);
+
+  const W=canvas.offsetWidth, H=canvas.offsetHeight;
+  const PAD={t:10,b:28,l:44,r:16};
+  const cW=W-PAD.l-PAD.r, cH=H-PAD.t-PAD.b;
+  const data=rangeData, n=data.length;
+  const maxV=32, minV=0;
+
+  function valY(v){ return PAD.t + cH*(1-(v-minV)/(maxV-minV)); }
+  function idxX(i){ return PAD.l + (i/(n-1))*cW; }
+
+  ctx.strokeStyle='rgba(255,255,255,0.04)'; ctx.lineWidth=1;
+  for(let i=0;i<=4;i++){
+    const y=PAD.t+cH*i/4;
+    ctx.beginPath(); ctx.moveTo(PAD.l,y); ctx.lineTo(W-PAD.r,y); ctx.stroke();
+    ctx.fillStyle='#8A9BB0'; ctx.font='10px Inter';
+    ctx.fillText(Math.round(maxV*(1-i/4)),2,y+4);
+  }
+
+  // UCL R
+  ctx.save(); ctx.strokeStyle='#C8A84B'; ctx.lineWidth=1; ctx.setLineDash([5,4]);
+  ctx.beginPath(); ctx.moveTo(PAD.l,valY(28)); ctx.lineTo(W-PAD.r,valY(28)); ctx.stroke();
+  ctx.fillStyle='#C8A84B'; ctx.font='9px Inter'; ctx.setLineDash([]);
+  ctx.fillText('UCL R=28', W-PAD.r-50, valY(28)-3);
+  ctx.restore();
+
+  // bars
+  const bW = cW/n*0.6;
+  data.forEach((v,i)=>{
+    if(v===null) return;
+    const x=idxX(i)-bW/2, y=valY(v), bH=cH-(valY(v)-PAD.t);
+    ctx.fillStyle = i<10 ? 'rgba(232,112,112,0.45)' : 'rgba(107,191,160,0.45)';
+    ctx.fillRect(x, y, bW, PAD.t+cH-y);
+    ctx.strokeStyle = i<10 ? '#E87070' : '#6BBFA0';
+    ctx.lineWidth=1.2; ctx.strokeRect(x,y,bW,PAD.t+cH-y);
+  });
+
+  ctx.fillStyle='#8A9BB0'; ctx.font='9px Inter';
+  data.forEach((v,i)=>{
+    if(i%2===0&&v!==null) ctx.fillText(xbarLabels[i], idxX(i)-12, H-6);
+  });
+})();
+
+// ─── PARETO CHART ─────────────────────────────────────────────────────────────
+(function(){
+  const canvas = document.getElementById('pareto-chart');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.width  = canvas.offsetWidth * devicePixelRatio;
+  canvas.height = canvas.offsetHeight * devicePixelRatio;
+  ctx.scale(devicePixelRatio, devicePixelRatio);
+
+  const W=canvas.offsetWidth, H=canvas.offsetHeight;
+  const PAD={t:16,b:44,l:48,r:48};
+  const cW=W-PAD.l-PAD.r, cH=H-PAD.t-PAD.b;
+  const n=paretoCateg.length;
+  const maxCount=paretoCounts[0];
+  const bW=cW/n*0.65, gap=cW/n;
+
+  function barX(i){ return PAD.l + gap*i + (gap-bW)/2; }
+  function countY(v){ return PAD.t + cH*(1-v/maxCount); }
+  function pctY(v){ return PAD.t + cH*(1-v/100); }
+
+  // bars
+  paretoCateg.forEach((_,i)=>{
+    const h=cH*paretoCounts[i]/maxCount;
+    ctx.fillStyle = i===0 ? 'rgba(200,168,75,0.6)' : 'rgba(74,144,164,0.4)';
+    ctx.fillRect(barX(i), PAD.t+cH-h, bW, h);
+    ctx.strokeStyle = i===0 ? '#C8A84B' : '#4A90A4';
+    ctx.lineWidth=1.5; ctx.strokeRect(barX(i),PAD.t+cH-h,bW,h);
+    // count label
+    ctx.fillStyle='#E8EDF2'; ctx.font='bold 11px Inter';
+    ctx.fillText(paretoCounts[i], barX(i)+bW/2-8, PAD.t+cH-h-5);
+    // x label
+    ctx.fillStyle='#8A9BB0'; ctx.font='9px Inter';
+    const lbl=paretoCateg[i];
+    ctx.fillText(lbl.length>12?lbl.substring(0,12)+'…':lbl, barX(i), H-6);
+  });
+
+  // cumulative line
+  let cumPct=0;
+  const pts=[];
+  paretoCounts.forEach((c,i)=>{
+    cumPct += c/paretoTotal*100;
+    pts.push({x:barX(i)+bW/2, y:pctY(cumPct)});
+  });
+  ctx.beginPath(); ctx.strokeStyle='#E87070'; ctx.lineWidth=2; ctx.setLineDash([]);
+  pts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+  ctx.stroke();
+  pts.forEach(p=>{ ctx.beginPath(); ctx.arc(p.x,p.y,3.5,0,2*Math.PI); ctx.fillStyle='#E87070'; ctx.fill(); });
+
+  // 80% line
+  ctx.save(); ctx.strokeStyle='rgba(232,112,112,0.4)'; ctx.lineWidth=1; ctx.setLineDash([4,4]);
+  ctx.beginPath(); ctx.moveTo(PAD.l,pctY(80)); ctx.lineTo(W-PAD.r,pctY(80)); ctx.stroke();
+  ctx.fillStyle='#E87070'; ctx.font='9px Inter'; ctx.setLineDash([]);
+  ctx.fillText('80%', W-PAD.r+2, pctY(80)+4);
+  ctx.restore();
+
+  // y left axis
+  ctx.fillStyle='#8A9BB0'; ctx.font='9px Inter';
+  [0,100,200,300].forEach(v=>{
+    if(v<=maxCount) ctx.fillText(v, 2, countY(v)+4);
+  });
+  // y right axis
+  [0,20,40,60,80,100].forEach(v=>{
+    ctx.fillStyle='#8A9BB0'; ctx.font='9px Inter';
+    ctx.fillText(v+'%', W-PAD.r+4, pctY(v)+4);
+  });
+})();
+
+// ─── SCROLL REVEAL ────────────────────────────────────────────────────────────
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.12});
+reveals.forEach(r=>io.observe(r));
+</script>
+</body>
+</html>
